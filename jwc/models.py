@@ -15,9 +15,15 @@ class Question(models.Model):
     content = models.TextField()
     create_date = models.DateTimeField()
 
+    def __str__(self):
+        return self.subject
+
 class Answer(models.Model):
     #ForeignKey : 기존 모델을 속성으로 연결
     #on_delete=models.CASCADE : 이 속성에 연결된 속성이 삭제되면 같이 삭제됨
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     content = models.TextField()
     create_date = models.DateTimeField()
+
+    def __str__(self):
+        return self.content
