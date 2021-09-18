@@ -1,9 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render, redirect
+from django.utils import timezone
 from django.http import HttpResponse
 from .models import Question as Q
-
+from .models import Answer as A
 
 # Create your views here.
+
+def home(request):
+    return render(request,'jwc/home.html')
+
 
 def index(request):
     '''
@@ -23,8 +28,25 @@ def detail(request, q_id):
 
     '''
     question = Q.objects.get(id=q_id)
-    context = {'q':question}
+    answer = A.objects.get(id=q_id)
+    context = {'q':question, 'a':answer}
     return render(request,'jwc/question_detail.html',context)
+
+def answer_create(request, q_id):
+    '''
+    jwc 질문 답변 등록
+
+    '''
+    question = get_object_or_404(Q,pk = q_id)
+    #질문에 대한 답변 목록(answer_set) 생성(.create)
+    #what is answer_set? auto created?
+    #https://pybo.kr/pybo/question/detail/83/?page=1
+    #django automatically created 'modelname(in small alphabet)+ _set' if connected with foreign key
+    question.answer_set.create(content=request.POST.get('content'),create_date = timezone.now())
+
+    #redirect : url 매핑
+    #render : template 매핑
+    return redirect('jwc:detail', q_id = q_id)
 
 
 #html template 문법 사용

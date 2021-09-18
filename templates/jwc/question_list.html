@@ -1,7 +1,7 @@
 {% if question_list %}
     <ul>
     {% for question in question_list %}
-        <li>{{ question.id }}<a href="/pybo/{{ question.id }}/">{{ question.subject }}</a></li>
+        <li>{{ question.id }}<a href="{% url 'jwc:detail' question.id %}">{{ question.subject }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

@@ -1,0 +1,19 @@
+<html>
+    <title>
+        JWC Application
+    </title>
+    <body>
+        <h2>Welcome to JWC</h2>
+        <h4>Let's use jwc</h4>
+
+        <form action="{% url 'jwc:index' %}" method = "post">
+        {% csrf_token %}
+        <input type="submit" value="go">
+
+        </form>
+
+
+    </body>
+
+
+</html>

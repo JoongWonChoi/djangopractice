@@ -1,5 +1,24 @@
-<h1>{{ q.subject }}</h1>
+<h1>
+{{ q.subject }}
+</h1>
+<h2>{{ q.content }}</h2>
 
+
+<h5> {{ q.answer_set.count }} 개의 답변이 있습니다.</h5>
 <div>
-    {{ q.content }}
+    <ul>
+        {% for answer in q.answer_set.all %}
+            <li>{{ answer.content }}</li>
+        {% endfor %}
+    </ul>
 </div>
+
+
+
+<form action="{% url 'jwc:answer_create' q.id %}" method="post">
+{% csrf_token %}
+<textarea name = 'content' id='content' row='15'></textarea>
+<input type='submit' value='답변등록'>
+</form>
+
+
