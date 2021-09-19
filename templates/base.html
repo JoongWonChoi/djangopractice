@@ -1,0 +1,34 @@
+<!-- template 상속용 기본 html 파일  -->
+<!-- 사용법  -->
+<!-- 1. 원하는 html파일들 생성  -->
+<!-- 2. 상단에 해당 파일(base.html) 상속받기  -->
+
+<!-- html파일 body 내에 작성할 내용들 작성  -->
+
+<!-- css / link 등은 head에서 처리해야함  -->
+
+
+
+{% load static %}
+
+<html> 
+
+<head>
+    <!-- static내의 style.css파일 상속 -->
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <!-- static내의 bootstrap.min.css 파일 상속 -->
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+
+    <title>JWC</title>
+
+</head>
+
+<body>
+<!-- template들에게 상속될 부분 -->
+{% block content%}
+
+{% endblock %}
+<!-- template들에게 상속될 부분 끝-->
+</body>
+
+</html>

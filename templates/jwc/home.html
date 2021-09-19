@@ -1,16 +1,24 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+
+
+
+
 <html>
     <title>
         JWC Application
     </title>
     <body>
-        <h2>Welcome to JWC</h2>
-        <h4>Let's use jwc</h4>
-
-        <form action="{% url 'jwc:index' %}" method = "post">
-        {% csrf_token %}
-        <input type="submit" value="go">
-
-        </form>
+        <div class="container row" style="float: none; margin:100 auto;"> <div class="col-md-3" style="float: none; margin:0 auto;">
+            <h2>Welcome to JWC</h2>
+            <h4>Let's use jwc</h4>
+        </div>
+        <div class="container row" style="float: none; margin:100 auto;"> <div class="col-md-3" style="float: none; margin:0 auto;">
+            <form action="{% url 'jwc:index' %}" method = "post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-secondary btn-lg">go!</button>
+            </form>
+        </div>
 
 
     </body>
