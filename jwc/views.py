@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.http import HttpResponse
 from .models import Question as Q
 from .models import Answer as A
+from .forms import Questionform
 
 # Create your views here.
 
@@ -47,6 +48,24 @@ def answer_create(request, q_id):
     #redirect : url 매핑
     #render : template 매핑
     return redirect('jwc:detail', q_id = q_id)
+
+def question_create(request):
+    '''
+    jwc질문 등록
+
+    '''
+    #form 변수에 Questionform 연결
+    if request.method == "POST":
+        form = Questionform(request.POST)
+        if form.is_valid():
+            question = form.save(commit=False)
+            question.create_date = timezone.now()
+            question.save()
+            return redirect("jwc:index")
+    else:
+        form = Questionform()
+    context = {'form':form}
+    return render(request, 'jwc/question_form.html', context)
 
 
 #html template 문법 사용
