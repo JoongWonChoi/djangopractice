@@ -55,6 +55,7 @@ def question_create(request):
 
     '''
     #form 변수에 Questionform 연결
+    #request 인자에 들어오는 값에 따라 구분
     if request.method == "POST":
         form = Questionform(request.POST)
         if form.is_valid():
