@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import fields
+from django.forms import fields, widgets
 from jwc.models import Question
 
 
@@ -14,3 +14,17 @@ class Questionform(forms.ModelForm):
     class Meta:
         model = Question #사용할 모델
         fields = ['subject', 'content'] #Question form에서 사용할 Question 모델의 속성들
+        #지정한 속성들의 모양 지정
+        widgets = {
+            'subject' : forms.TextInput(attrs={'class':'form-control'}),
+            'content' : forms.Textarea(attrs={'class':'form-control', 'rows':10})
+        }
+        #지정한 속성들의 naming
+        labels = {
+            'subject' : '제목',
+            'content' : '내용'
+        }
+
+
+#djangp form 더 알아보기
+#https://docs.djangoproject.com/en/3.0/topics/forms/
