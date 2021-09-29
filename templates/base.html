@@ -25,10 +25,20 @@
 
 <body>
 <!-- template들에게 상속될 부분 -->
+{% include 'navbar.html' %}
 {% block content%}
+
 
 {% endblock %}
 <!-- template들에게 상속될 부분 끝-->
+
+<!-- jQuery JS -->
+<script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+
+<!-- Bootstrap JS -->
+<script src="{% static 'bootstrap.min.js' %}"></script>
+
+
 </body>
 
 </html>

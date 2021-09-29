@@ -78,6 +78,7 @@ def question_create(request):
             question = form.save(commit=False)
             #이 때 임시저장 즉 commit=False를 하지 않으면 오류 발생. Question 모델의 속성인  create_date가 정의되지 않았기 때문
             #question = form.save()
+            #create_date는 저장 시점에 생성되어야 하므로 Questionform의 속성으로 지정하지 않는다.
             question.create_date = timezone.now()
             question.save()
             return redirect("jwc:index")
