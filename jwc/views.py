@@ -16,10 +16,20 @@ def index(request):
     jwc 질문 목록 출력
 
     '''
+    #입력 파라미터
+    #GET방식으로 호출된 URL에서 page값을 가져올 때 사용. default=1
+    #예를 들어 .../jwc/?page=1
+    page = request.GET.get('page','1')#페이지
+
     #질문 목록 출력 순서
     #기준이 되는 속성에 '-'를 붙이면 역순
+    #조회
     question_list = Q.objects.order_by('-create_date')
-    context = {'question_list':question_list}
+    #페이징 처리
+    paginator = Paginator(question_list,10) #페이지당 10개씩 보여주기
+    page_obj = paginator.get_page(page) #페이지 객체 생성
+
+    context = {'question_list':page_obj}
 
     return render(request, 'jwc/question_list.html',context)
 
