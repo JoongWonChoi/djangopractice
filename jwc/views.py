@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from .models import Question as Q
 from .models import Answer as A
 from .forms import Questionform
+from django.core.paginator import Paginator
 
 # Create your views here.
 
