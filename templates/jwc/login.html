@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+<ul>
+    <li onclick="kakaoLogin();">
+    <a href="javascrpit:void(0)">
+        <span>카카오 로그인</span>
+    </a>
+    </li>
+    <li onclick="kakaoLogout();">
+    <a href="javascrpit:void(0)">
+        <span>카카오 로그아웃</span>
+    </a>
+    </li>
+</ul>
+
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+Kakao.init('127b29e8d96ffa7a17e9425c460ffc45'); // 발급받은 키 중 javascript키를 사용
+console.log(Kakao.isinitialized()); //sdk 초기화 여부 판단
+//카카오 로그인
+function kakaoLogin(){
+    Kakao.Auth.login({
+        success: function(response){
+            Kakao.API.request({
+                url:'/v2/user/me',
+                success: function(response){
+                    console.log(response)
+                },
+                fail: function(error){
+                    console.log(error)
+                },
+            })
+        },
+        fail: function(error){
+            console.log(error)
+        },
+    })
+}
+//z카카오 로그아웃
+function kakaoLogout(){
+    if(Kakao.Auth.getAccessToken()){
+        Kakao.API.request({
+            url: 'v1/user/unlink',
+            success: function(response){
+                console.log(response)
+            },
+            fail: function(error){
+                console.log(error)
+            },
+        })
+    Kakao.Auth.setAccessToken(undefined)
+    }
+}
+</script>
+
+
+
+{% endblock %}

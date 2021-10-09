@@ -98,6 +98,12 @@ def question_create(request):
     context = {'form':form}
     return render(request, 'jwc/question_form.html', context)
 
+def login(req):
+    return render(req, 'jwc/login.html')
+
+
+
+
 
 #html template 문법 사용
 #https://wikidocs.net/70736
